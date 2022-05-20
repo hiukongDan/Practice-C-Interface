@@ -1,0 +1,11 @@
+The typedef defines the type Stack_T, which is a pointer to a structure
+with a tag of the same name. This definition is legal because structure,
+union, and enumeration tags occupy a name space that is separate from
+the space for variables, functions, and type names. (P21)
+
+Runtime errors are breaches of the contract between clients and implementations,
+and are program bugs from which there is no recovery. (P24)
+
+They(Exception Interface) suffice for most applications because exceptions should 
+be used sparingly — only a handful in a large application. If exceptions proliferate,
+it’s usually a sign of more serious design errors. (P52)
