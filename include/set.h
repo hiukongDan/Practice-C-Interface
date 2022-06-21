@@ -4,15 +4,15 @@
 #define T Set_T
 typedef struct T *T;
 
-extern T Set_new(int hint, int cmp(const void* a, const void* b), unsigned hash(const void* member));
+extern T Set_new(int hint, int (*cmp)(const void* a, const void* b), unsigned (*hash)(const void* member));
 extern void Set_free(T *set);
 
-extern int Set_member(T set, void* member);
+extern int Set_member(T set, const void* member);
 extern int Set_length(T set);
-extern void Set_put(T set, void* member);
-extern void* Set_remove(T set, void* member);
+extern void Set_put(T set, const void* member);
+extern void* Set_remove(T set, const void* member);
 
-extern void Set_map(T set, void apply(const void* member, void* cl), void* cl));
+extern void Set_map(T set, void (*apply)(const void* member, void* cl), void* cl);
 extern void** Set_toArray(T set, void* end);
 
 extern T Set_union(T s, T t);

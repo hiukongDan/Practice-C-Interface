@@ -16,4 +16,5 @@ extern int Table_length(T table);
 extern void Table_map(T table, void apply(const void* key, void** value, void* cl), void* cl);
 extern void** Table_toArray(T table, void* end);
 
+#undef T
 #endif

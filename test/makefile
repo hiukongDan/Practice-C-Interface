@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -Wall -I../include -I.
+CFLAGS = -I../include -I.
 LDFLAGS =
 TARGET = a.exe
 SOURCEDIR = ../source
 OBJDIR = .
-SOURCE = except.c assert.c list.c mem.c table.c
-SOURCES = $(addprefix $(SOURCEDIR)/, $(SOURCE)) test_set.c
+SOURCE = except.c assert.c mem.c array.c arrayrep.c seq.c
+SOURCES = $(addprefix $(SOURCEDIR)/, $(SOURCE)) test_seq.c
 OBJS = $(subst $(SOURCEDIR), $(OBJDIR), $(SOURCES:.c=.o))
 
 $(TARGET): $(OBJS)
