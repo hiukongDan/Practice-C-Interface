@@ -44,7 +44,7 @@
 		printf("x");\
 	}\
 	}while(0)
-		
+
 #define assert_sametype(a, b) do{\
 	if (typeof(a) == typeof(b)){\
 		printf(".");\
