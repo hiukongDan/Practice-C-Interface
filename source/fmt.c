@@ -210,6 +210,13 @@ static T cvt[256] = {
 	/* 120-127 */ cvt_x, 0, 0, 0, 0, 0, 0, 0
 };
 
+void Fmt_fmt(int put(int c, void *cl), void *cl, const char *fmt, ...){
+	va_list ap;
+	va_start(ap, fmt);
+	Fmt_vfmt(put, cl, fmt, ap);
+	va_end(ap);
+}
+
 void Fmt_vfmt(int put(int c, void *cl), void *cl, const char *fmt, va_list ap){
 	assert(put);
 	assert(fmt);

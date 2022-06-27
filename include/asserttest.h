@@ -5,6 +5,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define assert_true(stmt) do{\
+	if(stmt){\
+		printf(".");\
+	}else{\
+		printf("x");\
+	}\
+	}while(0)
+
+#define assert_false(stmt) do{\
+	if(!(stmt)){\
+		printf(".");\
+	}else{\
+		printf("x");\
+	}\
+	}while(0)
+
 #define assert_equal(a, b) do{\
 	if ((a) == (b)){\
 		printf(".");\
