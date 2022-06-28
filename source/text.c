@@ -68,7 +68,7 @@ T Text_put(const char *str){
 	
 	T text;
 	text.len = strlen(str);
-	text.str = memcpy(ALLOC(text.len), str, text.len);
+	text.str = memcpy(alloc(text.len), str, text.len);
 	return text;
 }
 
@@ -114,11 +114,29 @@ int Text_pos(T s, int i){
 T Text_cat(T s1, T s2){
 	assert(s1.len >= 0 && s1.str);
 	assert(s2.len >= 0 && s2.str);
+	
+	if(s1.len == 0)
+		return s2;
+	if(s2.len == 0)
+		return s1;
+	
+	if(s1.str + s1.len == s2.str){
+		s1.len += s2.len;
+		return s1;
+	}
+	
 	T text;
 	text.len = s1.len + s2.len;
-	text.str = ALLOC(text.len);
-	memcpy((void*)(text.str), (void*)(s1.str), s1.len);
-	memcpy((void*)(text.str+s1.len), (void*)(s2.str), s2.len);
+	if(isatend(s1, s2.len)){
+		text.str = s1.str;
+		memcpy(alloc(s2.len), s2.str, s2.len);
+	}
+	else{
+		char *p;
+		text.str = p = alloc(s1.len + s2.len);
+		memcpy(p, s1.str, s1.len);
+		memcpy(p + s1.len, s2.str, s2.len);
+	}
 	return text;
 }
 
@@ -132,10 +150,20 @@ T Text_dup(T s, int n){
 	
 	T text;
 	text.len = s.len * n;
-	text.str = ALLOC(text.len);
-	for(int i = 0; i < n; i++){
-		memcpy((void*)(text.str+(i*s.len)), (void*)(s.str), s.len);
+	char *p;
+	if(isatend(s, text.len - s.len)){
+		text.str = s.str;
+		p = alloc(text.len - s.len);
+		n--;
 	}
+	else{
+		p = alloc(text.len);
+	}
+	
+	for(; n-- > 0; p += s.len){
+		memcpy(p, s.str, s.len);
+	}
+	
 	return text;
 }
 
@@ -146,7 +174,7 @@ T Text_reverse(T s){
 	T text;
 	text.len = s.len;
 	char str[text.len];
-	text.str = ALLOC(text.len);
+	text.str = alloc(text.len);
 	for(int i = 0; i < s.len; i++){
 		str[i] = s.str[s.len-i-1];
 	}
