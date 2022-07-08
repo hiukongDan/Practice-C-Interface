@@ -4,8 +4,8 @@ LDFLAGS =
 TARGET = a.exe
 SOURCEDIR = ../source
 OBJDIR = .
-SOURCE = except.c assert.c mem.c fmt.c text.c
-SOURCES = $(addprefix $(SOURCEDIR)/, $(SOURCE)) test_text.c
+SOURCE = except.c assert.c mem.c fmt.c thread.c chan.c sem.c
+SOURCES = $(addprefix $(SOURCEDIR)/, $(SOURCE)) test_thread.c
 OBJS = $(subst $(SOURCEDIR), $(OBJDIR), $(SOURCES:.c=.o))
 
 $(TARGET): $(OBJS)
